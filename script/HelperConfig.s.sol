@@ -28,6 +28,7 @@ contract HelperConfig is Script, codeConstants {
         uint32 callbackGasLimit;
         uint256 subscriptionId;
         address link;
+        address account;
     }
 
     NetworkConfig public localNetworkConfig;
@@ -47,6 +48,10 @@ contract HelperConfig is Script, codeConstants {
         }
     }
 
+    function setConfig(uint256 chainId, NetworkConfig memory networkConfig) public {
+        networkConfigs[chainId] = networkConfig;
+    }
+
     function getSepoliaEthConfig() public pure returns (NetworkConfig memory) {
         return NetworkConfig({
             entranceFee: 0.01 ether,
@@ -55,7 +60,8 @@ contract HelperConfig is Script, codeConstants {
             gasLane: 0x787d74caea10b2b357790d5b5247c2f63d1d91572a9846f780606e4d953677ae,
             callbackGasLimit: 500000,
             subscriptionId: 50242049616864932864849130234057634176158380002038051282077551091166307943364,
-            link: 0x779877A7B0D9E8603169DdbD7836e478b4624789
+            link: 0x779877A7B0D9E8603169DdbD7836e478b4624789,
+            account: 0xDd38a864c72b825c5F10B6da2c2F0F8Bfec07C42
         });
     }
 
@@ -79,7 +85,8 @@ contract HelperConfig is Script, codeConstants {
             gasLane: 0x787d74caea10b2b357790d5b5247c2f63d1d91572a9846f780606e4d953677ae,
             callbackGasLimit: 500000,
             subscriptionId: 0,
-            link: address(linkToken)
+            link: address(linkToken),
+            account: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
         });
         return localNetworkConfig;
     }
